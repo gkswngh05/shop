@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager #, PermissionsMixin
 
 from django.db.models import signals
 
@@ -38,10 +38,12 @@ class UserManager(BaseUserManager):
         
         user.set_password(password)
         user.is_admin = True
+        user.is_seller = True
         user.save(using=self._db)
         return user
     
 
+#class User(AbstractBaseUser, PermissionsMixin):
 class User(AbstractBaseUser):
     userName = models.CharField(primary_key=True, null=False, blank=False, max_length=20)
     name = models.CharField(null=False, blank=False, max_length=20)
@@ -64,6 +66,9 @@ class User(AbstractBaseUser):
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
         # Simplest possible answer: Yes, always
+        # if (self.is_admin): return True
+        # elif (self.is_seller): return True
+        # else: return False
         return True
 
     def has_module_perms(self, app_label):
@@ -75,6 +80,9 @@ class User(AbstractBaseUser):
     def is_staff(self):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
+        # if(self.is_admin): return True
+        # elif(self.is_seller): return True
+        # else: return False
         return self.is_admin
 
 class Item(models.Model):

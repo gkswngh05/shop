@@ -2,13 +2,34 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
+from ..models import *
+from django.contrib.auth import authenticate, logout, login
 
-from .models import *
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 
-def index(request):
-    return render(request, 'index.html')
+def join(request):
+    if request.user.is_authenticated:
+        return redirect("shopapp:index")
+    if request.GET.get('join') != '1':
+        return render(request, 'join.html')
+    dict = request.GET.copy()
 
+    try :
+        User.objects.create(
+            userId = dict['userId'],
+            name = dict['name'],
+            password = dict['password'],
+            callNumber = dict['callNumber'],
+            role = int(dict['role']),
+            address = dict['address'],
+        )
+        return HttpResponse("계정 생성 완료")
+    except:
+        return HttpResponse("계정 생성 오류")
+        
+@login_required
 def view(request):
     id = request.GET.get('id')
     if id == None: return HttpResponse("No id")
@@ -18,7 +39,8 @@ def view(request):
         return HttpResponse("Invalid id")
     #return HttpResponse(item.objects)
     return render(request, 'view.html', {"item" : item})
-        
+    
+@login_required 
 def cart(request):
     return HttpResponse("TODO")
     # tmp = ""
@@ -50,25 +72,9 @@ def cart(request):
     #     tmp += f"이름: {i.item.name} 갯수: {i.amount}, 단가: {i.item.price} 원\n"
     # return HttpResponse(tmp)
     #return render(request, 'view.html', {"item" : item, "seller_Name" : 0})
-    
-def join(request):
-    if request.GET.get('join') != '1':
-        return render(request, 'join.html')
-    dict = request.GET.copy()
 
-    try :
-        User.objects.create(
-            userId = dict['userId'],
-            name = dict['name'],
-            password = dict['password'],
-            callNumber = dict['callNumber'],
-            role = int(dict['role']),
-            address = dict['address'],
-        )
-        return HttpResponse("계정 생성 완료")
-    except:
-        return HttpResponse("계정 생성 오류")
 
+@login_required
 def account(request):
     userId = request.GET.get('user')
     try:
