@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계정 정보</title>
+</head>
+<body>
+    <h1>계정 정보</h1>
+    <p>아이디 : {{ user.userId }}</p>
+    <p>이름 : {{ user.name }}</p>
+    <p>전화번호 : {{ user.callNumber }}</p>
+    <p>계정 구분 : {{ user.role }}</p>
+    <h3>주소</h3>
+    <p>{{ user.address }}</p>
+</body>
+</html>

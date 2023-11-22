@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 정보</title>
+</head>
+<body>
+    <h1>상품 보기</h1>
+    <h3>상품 정보</h3>
+    <p>이름 : {{ item.name }}</p>
+    <p>판매자 : {{ item.sellerid.name }}</p>
+    <p>상품 코드 : {{ item.id }}</p>
+    <p>재고 : {{ item.stock }}</p>
+    <h3>상품 가격</h3>
+    <p>{{ item.price }} 원</p>
+    <h3>상품 이미지</h3>
+    <img src="{% get_static_prefix %}{{item.id}}.png" alt="상품 이미지" width=250>
+    <form action="/cart" method="get">
+        <input type="hidden" name="itemId" value={{ item.id }} />
+        <label for="itemAmount">주문 수량 :</label>
+        <input type="number" name="itemAmount" value=1 />
+        <label for="user">userId :</label>
+        <input type="number" name="user" value=1 />
+        <input type="submit" value="장바구니 담기" />
+    </form>
+</body>
+</html>

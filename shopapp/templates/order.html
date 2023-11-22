@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 주문</title>
+</head>
+<body>
+    <h1>상품 주문</h1>
+    <h3>상품 정보</h3>
+    <img src="{% get_static_prefix %}{{item.id}}.png" alt="상품 이미지" width=50>
+    <p>이름 : {{ item.name }}</p>
+    <p>판매자 : {{ item.sellerid }}</p>
+    <p>상품 코드 : {{ item.id }}</p>
+    <p>재고 : {{ item.amount }}</p>
+    <form action="/orderprocess/" method="post">
+        <input type="hidden" name="id" value={{ item.id }} />
+        <label for="amount">주문 수량 (9개 까지 주문 가능):</label>
+        <input type="number" id="amount" name="amount" min="1" max="9">
+        <label for="address">주소:</label>
+        <input type="text" id="address" name="address" maxlength=99>
+        <input type="submit" value="주문" />
+    </form>
+</body>
+</html>
