@@ -1,27 +1,7 @@
 from shopapp.models import *
-u1=User(userId = "test", name="테스트", password="test", callNumber="000-0000-0000", role=0, address="테스트")
-u1.save()
+u1 = User.objects.get(userName='root')
+c1 = Cart.objects.get(user=u1)
 
-u2 = User(userId = "test2", name="테스트2", password="test", callNumber="000-0000-0002", role=1, address="테스트2")
-u2.save()
+c1.cartItems.all()
 
-i1 = Item(name = "테스트", price = 12345, stock = 123, sellerid = u2)
-i1.save()
-
-i2 = Item(name = "테스트2", price = 12345, stock = 123, sellerid = u2)
-i2.save()
-
-u1.cartItems.add(i1, through_defaults={"amount" : 1})
-
-m1 = Cart(customer = u1, item = i2, amount = 34)
-m1.save()
-OR
-m1 = Cart.objects.create(customer = u1, item = i2, amount = 34)
-
-u1.cart_set.get(item_id=i1.id).amount
-u1.cart_set.get(item_id=i2.id).amount
-
-
-
-u1.cartItems.remove(i2)
-
+c1.cartlist_set.all()

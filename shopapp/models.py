@@ -4,6 +4,7 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+## admin.py도 참고 바람
 class UserManager(BaseUserManager):
     def create_user(self, userName, name, callNumber, address, password=None):
         if not userName:
@@ -88,7 +89,7 @@ class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cartItems = models.ManyToManyField(Item, through="CartList")
     def __str__(self):
-       return self.user.userName
+       return f"{self.user.userName}"
 
 class CartList(models.Model):
     user = models.ForeignKey(Cart, on_delete=models.CASCADE, null=False)
@@ -97,7 +98,7 @@ class CartList(models.Model):
     amount = models.IntegerField(null=False)
     
     def __str__(self):
-       return self.user.user.userName
+       return f"{self.item.name}, {self.amount}"
     
     class Meta:
         constraints = [
