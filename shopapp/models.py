@@ -4,6 +4,8 @@ from django.db import models
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+from django.db.models import signals
+
 ## admin.py도 참고 바람
 class UserManager(BaseUserManager):
     def create_user(self, userName, name, callNumber, address, password=None):
@@ -74,7 +76,6 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-    
 
 class Item(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -116,3 +117,11 @@ class Order(models.Model):
     orderDate = models.DateTimeField(null=False, auto_now_add=True)
     def __str__(self):
        return str(self.id)
+   
+   
+from django.dispatch import receiver
+@receiver(signals.post_save)
+def User_post_creation(sender, instance, created, **kwargs):
+    if(sender != User): return
+    if(created):
+        Cart.objects.create(user = instance)
