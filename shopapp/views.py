@@ -20,6 +20,7 @@ def view(request):
     return render(request, 'view.html', {"item" : item})
         
 def cart(request):
+    return HttpResponse("TODO")
     tmp = ""
     userId = request.GET.get('user')
     itemId = request.GET.get('itemId')
@@ -44,7 +45,7 @@ def cart(request):
         tmp += "장바구니 담기 성공\n"
 
     #return HttpResponse(user).cart_set.all())
-    tmp += f"{user.name}의 장바구니\n"
+    tmp += f"{user.username}의 장바구니\n"
     for i in user.cart_set.all():
         tmp += f"이름: {i.item.name} 갯수: {i.amount}, 단가: {i.item.price} 원\n"
     return HttpResponse(tmp)
