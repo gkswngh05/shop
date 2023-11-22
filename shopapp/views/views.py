@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse
 from ..models import *
 from django.contrib.auth import authenticate, logout, login
 
@@ -40,38 +40,6 @@ def view(request):
     #return HttpResponse(item.objects)
     return render(request, 'view.html', {"item" : item})
     
-@login_required 
-def cart(request):
-    return HttpResponse("TODO")
-    # tmp = ""
-    # userId = request.GET.get('user')
-    # itemId = request.GET.get('itemId')
-    # try:
-    #     itemAmount = int(request.GET.get('itemAmount'))
-    # except:
-    #     itemAmount = None
-    
-    # try:
-    #     user = User.objects.get(id = userId)
-    # except:
-    #     return HttpResponse("Invalid user")
-    
-    # if itemId != None:
-    #     if itemAmount == None: return HttpResponse("Invalid Amount")
-    #     try:
-    #         item = Item.objects.get(id = itemId)
-    #     except:
-    #         return HttpResponse("Invalid id")
-    #     user.cartItems.remove(item)
-    #     Cart.objects.create(customer = user, item = item, amount = itemAmount)
-    #     tmp += "장바구니 담기 성공\n"
-
-    # #return HttpResponse(user).cart_set.all())
-    # tmp += f"{user.username}의 장바구니\n"
-    # for i in user.cart_set.all():
-    #     tmp += f"이름: {i.item.name} 갯수: {i.amount}, 단가: {i.item.price} 원\n"
-    # return HttpResponse(tmp)
-    #return render(request, 'view.html', {"item" : item, "seller_Name" : 0})
 
 
 @login_required
