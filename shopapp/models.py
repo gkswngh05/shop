@@ -90,6 +90,7 @@ class Item(models.Model):
     name = models.CharField(null=False, max_length=20)
     price = models.IntegerField(null=False)
     stock = models.IntegerField(null=False)
+    deliveryCost = models.IntegerField(null=False)
     sellerid = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"is_seller" : True})
     def __str__(self):
        return self.name
