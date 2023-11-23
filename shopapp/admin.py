@@ -13,7 +13,7 @@ from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from forms import RegisterForm, UserChangeForm
+from .forms import RegisterForm, UserChangeForm
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
