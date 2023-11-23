@@ -17,7 +17,7 @@ def join(request):
     dict = request.GET.copy()
 
     try :
-        User.objects.create(
+        myUser.objects.create(
             userId = dict['userId'],
             name = dict['name'],
             password = dict['password'],
@@ -28,7 +28,7 @@ def join(request):
         return HttpResponse("계정 생성 완료")
     except:
         return HttpResponse("계정 생성 오류")
-        
+
 @login_required
 def view(request):
     id = request.GET.get('id')
@@ -46,7 +46,7 @@ def view(request):
 def account(request):
     userId = request.GET.get('user')
     try:
-        user = User.objects.get(id = userId)
+        user = myUser.objects.get(id = userId)
     except:
         return HttpResponse("Invalid user")
     return render(request, 'account.html', {"user" : user})
