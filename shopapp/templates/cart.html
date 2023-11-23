@@ -14,7 +14,7 @@
             <section>
                 <div>
                     <table class="table" style = "margin-top:100px;">
-                        <thead>
+                      <thead>
                           <tr>
                             <th scope="col">
                                 <div>
@@ -22,13 +22,15 @@
                                   </div>
                             </th>
                             <th scope="col">상품</th>
+                            <th scope="col">판매자</th>
                             <th scope="col">수량</th>
-                            <th scope="col">배송수단</th>
-                            <th scope="col">배송비</th>
+                            <th scope="col">단가</th>
                             <th scope="col">가격</th>
+                            <th scope="col">배송비</th>
                             <th scope="col">비고</th>
                           </tr>
                         </thead>
+                        {% for item in items %}
                         <tbody>
                           <tr>
                             <th style= "padding:15px;" scope="row">
@@ -36,49 +38,26 @@
                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
                                   </div>
                             </th>
-                            <td style= "padding:15px;">Mark</td>
-                            <td style= "padding:15px;">Otto</td>
-                            <td style= "padding:15px;">@mdo</td>
-                            <td style= "padding:15px;">2500원</td>
-                            <td style= "padding:15px;">250000원</td>
+                            <td style= "padding:15px;">{{ item.name }}</td>
+                            <td style= "padding:15px;">{{ item.seller }}</td>
+                            <td style= "padding:15px;">{{ item.amount }}</td>
+                            <td style= "padding:15px;">{{ item.price }}</td>
+                            <td style= "padding:15px;">{{ item.totalPrice }}</td>
+                            <td style= "padding:15px;">{{ item.deliveryCost }}</td>
                             <td style= "padding:15px;"><button type="button" class="btn btn-dark">삭제</button>
                             </td>
                           </tr>
-                          <tr>
-                            <th style= "padding:15px;" scope="row">
-                                <div>
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                  </div>
-                            </th>
-                            <td style= "padding:15px;">Jacob</td>
-                            <td style= "padding:15px;">Thornton</td>
-                            <td style= "padding:15px;">@fat</td>
-                            <td style= "padding:15px;">3000원</td>
-                            <td style= "padding:15px;">25200원</td>
-                            <td style= "padding:15px;"><button type="button" class="btn btn-dark">삭제</button> 
-                          </tr>
-                          <tr>
-                            <th style= "padding:15px;" scope="row">
-                                <div>
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                  </div>
-                            </th>
-                            <td style= "padding:15px;"colspan="2">Larry the Bird</td>
-                            <td style= "padding:15px;">@twitter</td>
-                            <td style= "padding:15px;">4500원</td>
-                            <td style= "padding:15px;">250011원</td>
-                            <td style= "padding:15px;"><button type="button" class="btn btn-dark">삭제</button>
-                          </tr>
                         </tbody>
+                        {% endfor %}
                       </table>
                 <div>
-                    <h6 style="text-align: right;margin-top:50px;">총 상품 가격 : 2500000원</h2>
-                    <h6 style="text-align: right">총 배송비 : 2500원</h2>  
-                    <h4 style="text-align: right;">총 결제 금액 : 2502000원</h2>
+                    <h6 style="text-align: right;margin-top:50px;">총 상품 가격 : {{cost.grandPrice}}원</h2>
+                    <h6 style="text-align: right">총 배송비 : {{cost.grandDeliveryCost}}원</h2>  
+                    <h4 style="text-align: right;">총 결제 금액 : {{cost.grandPrice|add:cost.grandDeliveryCost}}원</h2>
 
                 </div>
                 <div style="display: flex;justify-content: center;margin-top:30px;margin-bottom: 100px;">
-                    <button onClick="location.href='./index.html'" type="button" class="btn btn-light">쇼핑 계속하기</button>
+                    <button onClick="location.href='/'" type="button" class="btn btn-light">쇼핑 계속하기</button>
                     <button type="button" class="btn btn-dark">주문하기</button>
                 </div>
             </section>
