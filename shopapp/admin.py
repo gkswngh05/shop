@@ -25,7 +25,7 @@ class UserCreationForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
+        model = myUser
         fields = ['userName', 'name', 'callNumber', 'address']
 
     def clean_password2(self):
@@ -54,7 +54,7 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = User
+        model = myUser
         fields = ['userName', 'name', 'callNumber', 'address', "is_active", "is_seller", "is_admin"]
 
 
@@ -92,6 +92,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 # Now register the new UserAdmin...
-admin.site.register(User, UserAdmin)
+admin.site.register(myUser, UserAdmin)
 
 admin.site.unregister(Group)

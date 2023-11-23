@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager #, Perm
 from django.db.models import signals
 
 ## admin.py도 참고 바람
-class UserManager(BaseUserManager):
+class myUserManager(BaseUserManager):
     def create_user(self, userName, name, callNumber, address, password=None):
         if not userName:
             raise ValueError("Users must have an UserName")
@@ -44,7 +44,7 @@ class UserManager(BaseUserManager):
     
 
 #class User(AbstractBaseUser, PermissionsMixin):
-class User(AbstractBaseUser):
+class myUser(AbstractBaseUser):
     userName = models.CharField(primary_key=True, null=False, blank=False, max_length=20)
     name = models.CharField(null=False, blank=False, max_length=20)
     #password = models.CharField(null=False, blank=False, max_length=20)
@@ -54,7 +54,7 @@ class User(AbstractBaseUser):
     is_seller = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     
-    objects = UserManager()
+    objects = myUserManager()
 
     USERNAME_FIELD = 'userName'
     #EMAIL_FIELD = ''
@@ -91,12 +91,12 @@ class Item(models.Model):
     price = models.IntegerField(null=False)
     stock = models.IntegerField(null=False)
     deliveryCost = models.IntegerField(null=False)
-    sellerid = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={"is_seller" : True})
+    sellerid = models.ForeignKey(myUser, on_delete=models.CASCADE, limit_choices_to={"is_seller" : True})
     def __str__(self):
        return self.name
 
 class Cart(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(myUser, on_delete=models.CASCADE)
     cartItems = models.ManyToManyField(Item, through="CartList")
     def __str__(self):
        return f"{self.user.userName}"
@@ -117,7 +117,7 @@ class CartList(models.Model):
 
 class Order(models.Model):
     id = models.BigAutoField(primary_key=True)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    customer = models.ForeignKey(myUser, on_delete=models.CASCADE)
     receiverName = models.CharField(null=False, max_length=20)
     receiverNumber = models.CharField(null=False, max_length=15)
     receiverAddress = models.CharField(null=False, max_length=200)
@@ -130,7 +130,7 @@ class Order(models.Model):
    
 from django.dispatch import receiver
 @receiver(signals.post_save)
-def User_post_creation(sender, instance, created, **kwargs):
-    if(sender != User): return
+def myUser_post_creation(sender, instance, created, **kwargs):
+    if(sender != myUser): return
     if(created):
         Cart.objects.create(user = instance)
