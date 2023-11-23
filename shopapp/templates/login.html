@@ -5,9 +5,18 @@
                 <form class="login" method="POST" action="{% url 'shopapp:login' %}">
                     {% csrf_token %}
                     <h2>Log-in</h2>
-                    {% if form.errors %}
-                    <p>Your username and password didn't match. Please try again.</p>
+
+                    {% if next %}
+                        {% if !user.is_authenticated %}
+                            <p>로그인이 필요합니다.</p>
+                        {% else %}
+                        {% endif %}
                     {% endif %}
+
+                    {% if form.errors %}
+                    <p>아이디 또는 비밀번호가 올바르지 않습니다.</p>
+                    {% endif %}
+                    
                     <div class="login_id">
                         <h4>Id</h4>
                         {% comment %} <input type="text" name="userid" id="" placeholder="Email"> {% endcomment %}
