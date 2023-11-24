@@ -12,9 +12,14 @@ def cart(request):
         item = request.POST.get("item")
         amount = request.POST.get("amount")
         if request.POST.get("operation") == '0':
+            if user.cart.cartlist_set.filter(item = Item.objects.get(id = int(item))).exists():
+                user.cart.cartlist_set.get(item = Item.objects.get(id = int(item))).delete()
             user.cart.cartlist_set.create(item = Item.objects.get(id = int(item)), amount = int(amount))
         elif request.POST.get("operation") == '1':
-            user.cart.cartlist_set.get(item = Item.objects.get(id = int(item))).delete()
+            if user.cart.cartlist_set.filter(item = Item.objects.get(id = int(item))).exists():
+                user.cart.cartlist_set.get(item = Item.objects.get(id = int(item))).delete()
+            else:
+                return HttpResponse("올바르지 않은 요청입니다.")
         else:
             return HttpResponse("올바르지 않은 요청입니다.")
     
@@ -36,6 +41,5 @@ def cart(request):
             })
         cost["grandDeliveryCost"] += i.item.deliveryCost
         cost["grandPrice"] += i.item.price * i.amount
-    
-    print(items)
+
     return render(request, 'cart.html', {"items" : items, "cost" : cost})
