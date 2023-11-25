@@ -1,6 +1,7 @@
 FROM python:3.10
 EXPOSE 8000
-ADD shop.tar /srv
+ADD shop.tar.gz /srv/shop
+ADD mysql.cnf /srv/shop
 WORKDIR /srv/shop
 RUN pip install --no-cache-dir --no-index -f /srv/shop/whl -r /srv/shop/requirements.txt
 RUN python3 /srv/shop/manage.py makemigrations

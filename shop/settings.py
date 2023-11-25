@@ -151,3 +151,4 @@ AUTH_USER_MODEL = "shopapp.myUser"
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/"
