@@ -1,7 +1,7 @@
 .git/
 .vscode/
 venv/
-mysql.cnf
+/mysql.cnf
 *.pyc
 __pycache__
 migrations
