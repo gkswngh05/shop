@@ -16,7 +16,6 @@ def order(request):
     cart = user.cart.cartlist_set.all()
 
     if request.method == 'POST':
-        form = None
         formdic = request.POST.copy()
         formdic["customer"] = user
         for i in cart:
