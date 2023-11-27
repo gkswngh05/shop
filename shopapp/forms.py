@@ -20,11 +20,11 @@ class RegisterForm(forms.ModelForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("비밀번호가 일치하지 않습니다.")
-        return password2
+        return password1
     
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.set_password(self.cleaned_data["password2"])
+        user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
         return user
