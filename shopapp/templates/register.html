@@ -7,38 +7,42 @@
                 <form class="register" method="POST" action="{% url 'shopapp:register' %}">
                     {% csrf_token %}
                     <h2>Register</h2>
-                    {{ form }}
-                    {% comment %} <div class="login_id">
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+                    <div class="login_id">
                         <h6>아이디</h6>
                         {{form.userName}}
                     </div>
                     <div class="login_pw">
                         <h6>이름</h6>
-                        <input type="text" name="" id="" placeholder="홍길동">
+                        {{form.name}}
                     </div>
                     <div class="login_pw">
                         <h6>전화번호</h6>
-                        <input type="text" name="" id="" placeholder="010-0000-0000">
+                        {{form.callNumber}}
                     </div>
                     <div class="login_pw">
-                        <h6>Address</h6>
-                        <input type="text" name="" id="" placeholder="충북 청주시 청원구 대성로 298">
+                        <h6>주소</h6>
+                        {{form.address}}
                     </div>
                     <div class="login_pw">
                         <h6>비밀번호</h6>
-                        <input type="password" name="" id="" placeholder="Password">
+                        {{form.password1}}
                     </div>
                     <div class="login_pw">
                         <h6>비밀번호 확인</h6>
-                        <input type="password" name="" id="" placeholder="Password">
+                        {{form.password2}}
                     </div>
-                    <div class="login_etc">
+                    <div class="login_etc" style="display: none">
                         <div class="checkbox">
                         </div>
                         <div class="forgot_pw">
                         <a href="">sign up</a>
                     </div> 
-                    </div>{% endcomment %}
+                    </div>
                     <div class="submit">
                         <input type="submit" value="submit">
                     </div>

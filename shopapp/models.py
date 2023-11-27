@@ -126,7 +126,7 @@ class Order(models.Model):
     orderDate = models.DateTimeField(null=False, auto_now_add=True)
     def __str__(self):
        return str(self.id)
-   
+
    
 from django.dispatch import receiver
 @receiver(signals.post_save)

@@ -11,6 +11,6 @@ def register(request):
             #return HttpResponse("Valid")
             form.save()
             return redirect("shopapp:index")
-        return HttpResponse("Invalid (Maybe password didn't match or too short/simple)")
+        render(request, 'register.html', {"form" : form})
     else: form = RegisterForm()
     return render(request, 'register.html', {"form" : form})
