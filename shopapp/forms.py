@@ -48,12 +48,12 @@ class OrderForm(forms.ModelForm):
     #     self.request = kwargs.pop("request")
     #     super(OrderForm, self).__init__(*args, **kwargs)
        
-    def save(self, commit=True):
-        order = super().save(commit=False)
-        # order.set_customer(self.request.user)
-        if commit == True:
-            order.save()
-        return order
+    # def save(self, commit=True):
+    #     order = super().save(commit=False)
+    #     # order.set_customer(self.request.user)
+    #     if commit == True:
+    #         order.save()
+    #     return order
         
 
     class Meta:

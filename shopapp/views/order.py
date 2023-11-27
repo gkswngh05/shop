@@ -24,8 +24,10 @@ def order(request):
             form = OrderForm(formdic)
             if form.is_valid():
                 form.save()
-            cart.delete()
-        return redirect("shopapp:index")
+            else:
+                return HttpResponse("<script>alert('주문 중 오류가 발생하였습니다.'); window.location.href='/'</script>")
+        cart.delete()
+        return HttpResponse("<script>alert('주문이 완료되었습니다.'); window.location.href='/'</script>")
     
     items = []
     cost = {
