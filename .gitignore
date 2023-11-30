@@ -7,3 +7,8 @@ __pycache__
 migrations
 .DS_Store
 shop.tar.gz
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
