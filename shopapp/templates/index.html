@@ -19,7 +19,7 @@
                         {% csrf_token %}
                         <div class="card h-100">
                             <!-- Product image 450x300 -->
-                            <img class="card-img-top" src="{% get_static_prefix %}img/{{ item.id }}.png" alt="{{item.id}}" />
+                            <img class="card-img-top" src="{% get_media_prefix %}img/{{ item.id }}.png" alt="{{item.id}}" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">

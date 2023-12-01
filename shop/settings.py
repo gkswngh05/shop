@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9&(0tiboe+8@pd*yjci=0^5!uzu31*$y)iu%x!3zjzlnq)j$8j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -82,11 +82,7 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 #     }
 # }
 
-##Workaround AWS Bug
-from pathlib import Path
 import os
-import subprocess
-import ast
 
 if 'RDS_HOSTNAME' in os.environ:
     print("this is a test")
@@ -159,14 +155,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
 
 
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'testapp' / 'static',
 # ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_ROOT = BASE_DIR / 'media'
 
+if 'MOUNT_DIRECTORY' in os.environ:
+    MEDIA_ROOT = os.environ['MOUNT_DIRECTORY']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

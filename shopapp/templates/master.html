@@ -24,7 +24,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/">Shop</a>
+                <a class="navbar-brand" href="{% url 'shopapp:index' %}">Shop</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -33,7 +33,7 @@
                     </ul>
                     
                     {% if user.is_authenticated %}
-                    <form class="d-flex" action="/cart">
+                    <form class="d-flex" action="{% url 'shopapp:cart' %}">
                         <button class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
@@ -45,9 +45,9 @@
                     <ul class="navbar-nav ms-lg-5">
                         <li class="nav-item">
                             {% if user.is_authenticated %}
-                                <a class="nav-link" href="logout">Logout</a>
+                                <a class="nav-link" href="{% url 'shopapp:logout' %}">Logout</a>
                             {% else %}
-                                <a class="nav-link" href="login">Login</a>
+                                <a class="nav-link" href="{% url 'shopapp:login' %}">Login</a>
                             {% endif %}
                         </li>
                     </ul>

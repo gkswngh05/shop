@@ -2,7 +2,7 @@
 {% block content %}
         <!-- Section-->
             <div class="wrap">
-                <form class="login" method="POST" action="{% url 'shopapp:login' %}">
+                <form class="login" method="POST">
                     {% csrf_token %}
                     <h2>Log-in</h2>
 
