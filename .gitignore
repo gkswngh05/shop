@@ -4,9 +4,9 @@ venv/
 /mysql.cnf
 *.pyc
 __pycache__
-#migrations
 .DS_Store
-shop.tar.gz
+.unused
+/static
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

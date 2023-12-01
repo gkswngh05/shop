@@ -1,7 +1,0 @@
-from shopapp.models import *
-u1 = User.objects.get(userName='root')
-c1 = Cart.objects.get(user=u1)
-
-c1.cartItems.all()
-
-c1.cartlist_set.all()
