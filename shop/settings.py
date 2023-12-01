@@ -88,15 +88,6 @@ import os
 import subprocess
 import ast
 
-def get_environ_vars():
-    completed_process = subprocess.run(
-        ['/opt/elasticbeanstalk/bin/get-config', 'environment'],
-        stdout=subprocess.PIPE,
-        text=True,
-        check=True)
-
-    return ast.literal_eval(completed_process.stdout)
-
 if 'RDS_HOSTNAME' in os.environ:
     print("this is a test")
     DATABASES = {
@@ -108,22 +99,25 @@ if 'RDS_HOSTNAME' in os.environ:
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
-            # 'OPTIONS': {
-            #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            # }
+            'OPTIONS': {
+                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            }
         }
     }
     
 else:
-    env_vars = get_environ_vars()
     DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env_vars['RDS_DB_NAME'],
-        'USER': env_vars['RDS_USERNAME'],
-        'PASSWORD': env_vars['RDS_PASSWORD'],
-        'HOST': env_vars['RDS_HOSTNAME'],
-        'PORT': env_vars['RDS_PORT'],
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            #"ENGINE": "mysql.connector.django",
+            # 'NAME': 'django',
+            # 'USER': 'ubuntu',
+            # 'PASSWORD': '1111',
+            # 'HOST': 'localhost',
+            # 'PORT': '3306',
+            "OPTIONS": {
+                "read_default_file": str(BASE_DIR / 'mysql.cnf'),
+            },
         }
     }
 
