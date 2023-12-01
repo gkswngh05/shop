@@ -95,9 +95,10 @@ def get_environ_vars():
         text=True,
         check=True)
 
-return ast.literal_eval(completed_process.stdout)
+    return ast.literal_eval(completed_process.stdout)
 
 if 'RDS_HOSTNAME' in os.environ:
+    print("this is a test")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
