@@ -6,7 +6,7 @@ venv/
 __pycache__
 .DS_Store
 .unused
-/static
+/static/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
