@@ -161,8 +161,8 @@ MEDIA_URL = 'media/'
 #     BASE_DIR / 'testapp' / 'static',
 # ]
 
-STATIC_ROOT = BASE_DIR / 'static'
-MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 if 'MOUNT_DIRECTORY' in os.environ:
     MEDIA_ROOT = os.environ['MOUNT_DIRECTORY']
