@@ -99,6 +99,7 @@ if 'RDS_HOSTNAME' in os.environ:
             # }
         }
     }
+    
 else:
     DATABASES = {
         "default": {
