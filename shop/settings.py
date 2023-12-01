@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9&(0tiboe+8@pd*yjci=0^5!uzu31*$y)iu%x!3zjzlnq)j$8j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -85,7 +85,6 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 import os
 
 if 'RDS_HOSTNAME' in os.environ:
-    print("this is a test")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
