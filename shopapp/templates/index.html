@@ -19,14 +19,17 @@
                         {% csrf_token %}
                         <div class="card h-100">
                             <!-- Product image 450x300 -->
-                            <img class="card-img-top" src="{% get_media_prefix %}img/{{ item.id }}.png" alt="{{item.id}}" loading="lazy" onerror="this.onerror=null; this.src='{% get_media_prefix %}img/noimage.png'" />
+                            <img class="card-img-top" src="{% get_media_prefix %}img/{{ item.id }}.png" alt="{{ item.id }}번 상품" loading="lazy" onerror="this.onerror=null; this.src='{% get_media_prefix %}img/noimage.png'" />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ item.name }}</h5>
+                                    <h5 class="fw-bolder">{{ item.id }}. {{ item.name }}</h5>
                                     <!-- Product price-->
-                                    {{ item.price }}원
+                                    판매자: {{ item.sellerid.name }}<br>
+                                    재고: {{ item.stock }}개<br>
+                                    가격: {{ item.price }}원<br>
+                                    배송비: {{ item.deliveryCost }}원
                                 </div>
                             </div>
                             <!-- Product actions-->
